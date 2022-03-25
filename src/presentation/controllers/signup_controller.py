@@ -1,7 +1,6 @@
 from src.presentation.errors.missing_param_error import MissingParamError
 from src.presentation.errors.invalid_param_error import InvalidParamError
-from src.presentation.errors.server_error import ServerError
-from src.presentation.helpers.http_helper import bad_request
+from src.presentation.helpers.http_helper import bad_request, server_error
 
 
 class SignUpController:
@@ -18,4 +17,4 @@ class SignUpController:
             if not is_valid:
                 return bad_request(InvalidParamError("email"))
         except:
-            return {"statusCode": 500, "body": ServerError()}
+            return server_error()
