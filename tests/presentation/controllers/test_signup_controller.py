@@ -42,3 +42,17 @@ def test_should_return_400_if_no_password_is_provided():
     http_response = sut.handle(http_request)
     assert http_response["statusCode"] == 400
     assert http_response["body"].args == MissingParamError("password").args
+
+
+def test_should_return_400_if_no_password_confirmation_is_provided():
+    sut = SignUpController()
+    http_request = {
+        "body": {
+            "name": "any_name",
+            "email": "any_email@mail.com",
+            "password": "any_password",
+        }
+    }
+    http_response = sut.handle(http_request)
+    assert http_response["statusCode"] == 400
+    assert http_response["body"].args == MissingParamError("password_confirmation").args
