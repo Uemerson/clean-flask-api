@@ -1,7 +1,5 @@
 from src.presentation.controllers.signup_controller import SignUpController
-from src.presentation.errors.missing_param_error import MissingParamError
-from src.presentation.errors.invalid_param_error import InvalidParamError
-from src.presentation.errors.server_error import ServerError
+from src.presentation.errors import InvalidParamError, MissingParamError, ServerError
 
 
 def make_sut():
@@ -101,7 +99,7 @@ def test_should_call_email_validator_with_correct_email(mocker):
     spy.assert_called_once_with("any_email@mail.com")
 
 
-def test_should_return_500_if_email_validator_throws(mocker):
+def test_should_return_500_if_email_validator_throws():
     class EmailValidatorStub:
         def is_valid(self, email):
             raise Exception()
