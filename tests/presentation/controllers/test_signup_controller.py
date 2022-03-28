@@ -72,6 +72,21 @@ def test_should_return_400_if_no_password_confirmation_is_provided():
     assert http_response["body"].args == MissingParamError("password_confirmation").args
 
 
+def test_should_return_400_if_password_confirmation_fails():
+    sut, _ = make_sut()
+    http_request = {
+        "body": {
+            "name": "any_name",
+            "email": "any_email@mail.com",
+            "password": "any_password",
+            "password_confirmation": "invalid_password",
+        }
+    }
+    http_response = sut.handle(http_request)
+    assert http_response["statusCode"] == 400
+    assert http_response["body"].args == InvalidParamError("password_confirmation").args
+
+
 def test_should_return_400_if_an_invalid_email_is_provided(mocker):
     sut, email_validator_stub = make_sut()
     mocker.patch.object(email_validator_stub, "is_valid", return_value=False)
