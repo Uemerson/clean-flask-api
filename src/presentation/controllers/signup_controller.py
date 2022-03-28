@@ -12,6 +12,8 @@ class SignUpController:
             for field in required_fields:
                 if http_request["body"].get(field) is None:
                     return bad_request(MissingParamError(field))
+            if http_request["body"]["password"] != http_request["body"]["password_confirmation"]:
+                return bad_request(InvalidParamError("password_confirmation"))
             is_valid = self._email_validator.is_valid(http_request["body"]["email"])
             if not is_valid:
                 return bad_request(InvalidParamError("email"))
