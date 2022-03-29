@@ -1,12 +1,13 @@
 from src.presentation.errors import InvalidParamError, MissingParamError
 from src.presentation.helpers.http_helper import bad_request, server_error
+from src.presentation.protocols.http import HttpResponse, HttpRequest
 
 
 class SignUpController:
     def __init__(self, email_validator):
         self._email_validator = email_validator
 
-    def handle(self, http_request):
+    def handle(self, http_request: HttpRequest) -> HttpResponse:
         try:
             required_fields = ["name", "email", "password", "password_confirmation"]
             for field in required_fields:
