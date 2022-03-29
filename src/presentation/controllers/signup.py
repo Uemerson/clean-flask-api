@@ -1,9 +1,7 @@
 from src.domain.usecases.add_account import AddAccount
-from src.presentation.protocols.email_validator import EmailValidator
 from src.presentation.errors import InvalidParamError, MissingParamError
 from src.presentation.helpers.http_helper import bad_request, server_error
-from src.presentation.protocols.http import HttpResponse, HttpRequest
-from src.presentation.protocols.controller import Controller
+from src.presentation.protocols import HttpResponse, HttpRequest, Controller, EmailValidator
 
 
 class SignUpController(Controller):

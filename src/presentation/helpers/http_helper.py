@@ -1,4 +1,4 @@
-from src.presentation.protocols.http import HttpResponse
+from src.presentation.protocols import HttpResponse
 from src.presentation.errors.server_error import ServerError
 
 

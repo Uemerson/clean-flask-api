@@ -1,5 +1,5 @@
 from src.presentation.controllers.signup import SignUpController
-from src.presentation.protocols.email_validator import EmailValidator
+from src.presentation.protocols import EmailValidator
 from src.presentation.errors import InvalidParamError, MissingParamError, ServerError
 from src.domain.models.account import AccountModel
 from src.domain.usecases.add_account import AddAccount, AddAccountModel
