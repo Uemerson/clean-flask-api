@@ -1,9 +1,10 @@
 from src.presentation.errors import InvalidParamError, MissingParamError
 from src.presentation.helpers.http_helper import bad_request, server_error
 from src.presentation.protocols.http import HttpResponse, HttpRequest
+from presentation.protocols.controller import Controller
 
 
-class SignUpController:
+class SignUpController(Controller):
     def __init__(self, email_validator):
         self._email_validator = email_validator
 
