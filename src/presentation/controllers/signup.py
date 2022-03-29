@@ -1,12 +1,15 @@
+from src.domain.usecases.add_account import AddAccount
+from src.presentation.protocols.email_validator import EmailValidator
 from src.presentation.errors import InvalidParamError, MissingParamError
 from src.presentation.helpers.http_helper import bad_request, server_error
 from src.presentation.protocols.http import HttpResponse, HttpRequest
-from presentation.protocols.controller import Controller
+from src.presentation.protocols.controller import Controller
 
 
 class SignUpController(Controller):
-    def __init__(self, email_validator):
+    def __init__(self, email_validator: EmailValidator, add_account: AddAccount):
         self._email_validator = email_validator
+        self._add_account = add_account
 
     def handle(self, http_request: HttpRequest) -> HttpResponse:
         try:
@@ -19,5 +22,12 @@ class SignUpController(Controller):
             is_valid = self._email_validator.is_valid(http_request["body"]["email"])
             if not is_valid:
                 return bad_request(InvalidParamError("email"))
+            self._add_account.add(
+                {
+                    "name": http_request["body"]["name"],
+                    "email": http_request["body"]["email"],
+                    "password": http_request["body"]["password"],
+                }
+            )
         except Exception:
             return server_error()
