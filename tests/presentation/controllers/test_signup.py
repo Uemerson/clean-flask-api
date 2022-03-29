@@ -172,3 +172,19 @@ def test_should_call_add_account_with_correct_values(mocker):
             "password": "any_password",
         }
     )
+
+
+def test_should_return_500_if_add_account_throws(mocker):
+    sut, _, add_account_stub = make_sut()
+    mocker.patch.object(add_account_stub, "add", side_effect=Exception())
+    http_request = {
+        "body": {
+            "name": "any_name",
+            "email": "any_email@mail.com",
+            "password": "any_password",
+            "password_confirmation": "any_password",
+        }
+    }
+    http_response = sut.handle(http_request)
+    assert http_response["statusCode"] == 500
+    assert http_response["body"].args == ServerError().args
