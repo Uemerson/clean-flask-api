@@ -188,3 +188,23 @@ def test_should_return_500_if_add_account_throws(mocker):
     http_response = sut.handle(http_request)
     assert http_response["statusCode"] == 500
     assert http_response["body"].args == ServerError().args
+
+
+def test_should_return_200_if_valid_data_is_provided(mocker):
+    sut, *_ = make_sut()
+    http_request = {
+        "body": {
+            "name": "valid_name",
+            "email": "valid_email@mail.com",
+            "password": "valid_password",
+            "password_confirmation": "valid_password",
+        }
+    }
+    http_response = sut.handle(http_request)
+    assert http_response["statusCode"] == 200
+    assert http_response["body"] == {
+        "id": "valid_id",
+        "name": "valid_name",
+        "email": "valid_email@mail.com",
+        "password": "valid_password",
+    }
