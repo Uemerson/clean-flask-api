@@ -20,12 +20,13 @@ class SignUpController(Controller):
             is_valid = self._email_validator.is_valid(http_request["body"]["email"])
             if not is_valid:
                 return bad_request(InvalidParamError("email"))
-            self._add_account.add(
+            account = self._add_account.add(
                 {
                     "name": http_request["body"]["name"],
                     "email": http_request["body"]["email"],
                     "password": http_request["body"]["password"],
                 }
             )
+            return {"statusCode": 200, "body": account}
         except Exception:
             return server_error()
