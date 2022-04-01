@@ -1,6 +1,6 @@
 from src.domain.usecases.add_account import AddAccount
 from src.presentation.errors import InvalidParamError, MissingParamError
-from src.presentation.helpers.http_helper import bad_request, server_error
+from src.presentation.helpers.http_helper import bad_request, server_error, ok
 from src.presentation.protocols import HttpResponse, HttpRequest, Controller, EmailValidator
 
 
@@ -27,6 +27,6 @@ class SignUpController(Controller):
                     "password": http_request["body"]["password"],
                 }
             )
-            return {"statusCode": 200, "body": account}
+            return ok(account)
         except Exception:
             return server_error()
