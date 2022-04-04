@@ -1,6 +1,10 @@
 from src.presentation.protocols.email_validator import EmailValidator
+import validators
 
 
 class EmailValidatorAdapter(EmailValidator):
     def is_valid(self, email: str) -> bool:
-        return False
+        try:
+            return validators.email(email)
+        except validators.ValidationFailure:
+            return False
