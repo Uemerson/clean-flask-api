@@ -1,4 +1,4 @@
-from src.utils.email_validator import EmailValidatorAdapter
+from src.utils.email_validator_adapter import EmailValidatorAdapter
 import validators
 
 
