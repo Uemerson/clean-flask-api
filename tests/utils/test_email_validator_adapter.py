@@ -13,3 +13,10 @@ def test_should_return_true_if_validator_returns_true():
     sut = EmailValidatorAdapter()
     is_valid = sut.is_valid("valid_email@mail.com")
     assert is_valid is True
+
+
+def test_call_validator_with_correct_email(mocker):
+    sut = EmailValidatorAdapter()
+    spy = mocker.spy(validators, "email")
+    sut.is_valid("any_email@mail.com")
+    spy.assert_called_once_with("any_email@mail.com")
