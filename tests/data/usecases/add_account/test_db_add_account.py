@@ -3,12 +3,16 @@ from src.data.protocols.encrypter import Encrypter
 from typing import Tuple
 
 
-def make_sut() -> Tuple[DbAddAccount, Encrypter]:
+def make_encrypter() -> Encrypter:
     class EncrypterStub(Encrypter):
         def encrypt(self, value: str) -> str:
             return "hashed_password"
 
-    encrypter_stub = EncrypterStub()
+    return EncrypterStub()
+
+
+def make_sut() -> Tuple[DbAddAccount, Encrypter]:
+    encrypter_stub = make_encrypter()
     sut = DbAddAccount(encrypter_stub)
     return sut, encrypter_stub
 
