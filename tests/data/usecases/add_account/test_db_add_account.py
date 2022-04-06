@@ -1,6 +1,7 @@
 from src.data.usecases.add_account.db_add_account import DbAddAccount
 from src.data.protocols.encrypter import Encrypter
 from typing import Tuple
+import pytest
 
 
 def make_encrypter() -> Encrypter:
@@ -27,3 +28,15 @@ def test_should_call_encrypter_with_correct_password(mocker):
     }
     sut.add(account_data)
     spy.assert_called_once_with("valid_password")
+
+
+def test_should_throw_if_encrypter_throws(mocker):
+    with pytest.raises(Exception):
+        sut, encrypter_stub = make_sut()
+        mocker.patch.object(encrypter_stub, "encrypt", side_effect=Exception())
+        account_data = {
+            "name": "valid_name",
+            "email": "valid_email",
+            "password": "valid_password",
+        }
+        sut.add(account_data)
