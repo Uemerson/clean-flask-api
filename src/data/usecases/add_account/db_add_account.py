@@ -1,6 +1,4 @@
-from src.domain.usecases.add_account import AddAccount, AddAccountModel
-from src.domain.models.account import AccountModel
-from src.data.protocols.encrypter import Encrypter
+from .db_add_account_protocols import AddAccount, AddAccountModel, AccountModel, Encrypter
 
 
 class DbAddAccount(AddAccount):

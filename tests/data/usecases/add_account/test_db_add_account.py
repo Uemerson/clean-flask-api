@@ -1,5 +1,5 @@
 from src.data.usecases.add_account.db_add_account import DbAddAccount
-from src.data.protocols.encrypter import Encrypter
+from src.data.usecases.add_account.db_add_account_protocols import Encrypter
 from typing import Tuple
 import pytest
 
