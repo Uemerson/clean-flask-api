@@ -6,8 +6,7 @@ class DbAddAccount(AddAccount):
         self._encrypter = encrypter
         self._add_account_repository = add_account_repository
 
-    def add(self, account: AddAccountModel) -> AccountModel:
-        hashed_password = self._encrypter.encrypt(account["password"])
-        account_data = dict(account, **{"password": hashed_password})
-        self._add_account_repository.add(account_data)
-        return None
+    def add(self, account_data: AddAccountModel) -> AccountModel:
+        hashed_password = self._encrypter.encrypt(account_data["password"])
+        account = self._add_account_repository.add(dict(account_data, **{"password": hashed_password}))
+        return account
