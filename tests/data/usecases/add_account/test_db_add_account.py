@@ -90,3 +90,19 @@ def test_should_throw_if_add_account_repository_throws(mocker):
             "password": "valid_password",
         }
         sut.add(account_data)
+
+
+def test_should_return_an_account_on_success():
+    sut, *_ = make_sut()
+    account_data = {
+        "name": "valid_name",
+        "email": "valid_email",
+        "password": "valid_password",
+    }
+    account = sut.add(account_data)
+    assert account == {
+        "id": "valid_id",
+        "name": "valid_name",
+        "email": "valid_email",
+        "password": "hashed_password",
+    }
