@@ -78,3 +78,15 @@ def test_should_call_add_account_repository_with_correct_values(mocker):
             "password": "hashed_password",
         }
     )
+
+
+def test_should_throw_if_add_account_repository_throws(mocker):
+    with pytest.raises(Exception):
+        sut, _, add_account_repository_stub = make_sut()
+        mocker.patch.object(add_account_repository_stub, "add", side_effect=Exception())
+        account_data = {
+            "name": "valid_name",
+            "email": "valid_email",
+            "password": "valid_password",
+        }
+        sut.add(account_data)
