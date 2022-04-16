@@ -3,5 +3,4 @@ from src.domain.models.account import AccountModel
 
 
 class AddAccountRepository:
-    def add(self, account: AddAccountModel) -> AccountModel:
-        pass
+    def add(self, account: AddAccountModel) -> AccountModel: ...

@@ -9,5 +9,4 @@ class AddAccountModel(TypedDict):
 
 
 class AddAccount:
-    def add(self, account: AddAccountModel) -> AccountModel:
-        pass
+    def add(self, account: AddAccountModel) -> AccountModel: ...

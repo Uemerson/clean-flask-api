@@ -1,3 +1,2 @@
 class Encrypter:
-    def encrypt(self, value: str) -> str:
-        pass
+    def encrypt(self, value: str) -> str: ...
