@@ -4,7 +4,4 @@ import validators
 
 class EmailValidatorAdapter(EmailValidator):
     def is_valid(self, email: str) -> bool:
-        try:
-            return validators.email(email)
-        except validators.ValidationFailure:
-            return False
+        return False if not validators.email(email) else True
